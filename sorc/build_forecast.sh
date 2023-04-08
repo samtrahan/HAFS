@@ -1,6 +1,6 @@
 #!/bin/sh
 set -eux
-source ./machine-setup.sh > /dev/null 2>&1
+source ./machine-setup.sh  > /dev/null 2>&1
 cwd=$(pwd)
 
 if [ $target = hera ]; then target=hera.intel ; fi
@@ -8,6 +8,7 @@ if [ $target = orion ]; then target=orion.intel ; fi
 if [ $target = jet ]; then target=jet.intel ; fi
 if [ $target = cheyenne ]; then target=cheyenne.intel ; fi
 if [ $target = wcoss2 ]; then target=wcoss2.intel ; fi
+if [ $target = axiom ]; then target=axiom.intel ; fi
 
 app=HAFS-ALL
 
