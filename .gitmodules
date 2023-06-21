@@ -1,23 +1,23 @@
 [submodule "ufs-weather-model"]
     path = sorc/hafs_forecast.fd
-    url = https://github.com/ufs-community/ufs-weather-model.git
-    branch = develop
+    url = https://github.com/samtrahan/ufs-weather-model.git
+    branch = axiom-azure
 [submodule "UFS_UTILS"]
     path = sorc/hafs_utils.fd
-    url = https://github.com/ufs-community/UFS_UTILS.git
-    branch = develop
+    url = https://github.com/samtrahan/UFS_UTILS.git
+    branch = axiom-azure
 [submodule "gfdl-tracker"]
     path = sorc/hafs_tracker.fd
-    url = https://github.com/hafs-community/gfdl-tracker.git
-    branch = support/HAFS
+    url = https://github.com/samtrahan/gfdl-tracker.git
+    branch = axiom-azure
 [submodule "NCEPLIBS-pyprodutil"]
     path = ush/produtil_repo
-    url = https://github.com/hafs-community/NCEPLIBS-pyprodutil.git
-    branch = support/HAFS
+    url = https://github.com/samtrahan/NCEPLIBS-pyprodutil.git
+    branch = axiom-azure
 [submodule "sorc/hafs_gsi.fd"]
     path = sorc/hafs_gsi.fd
-    url = https://github.com/NOAA-EMC/GSI.git
-    branch = release/hafs.v1
+    url = https://github.com/samtrahan/GSI.git
+    branch = axiom-azure
 [submodule "GPLOT"]
     path = sorc/hafs_graphics.fd/hrd_gplot
     url = https://github.com/hafs-community/GPLOT.git
