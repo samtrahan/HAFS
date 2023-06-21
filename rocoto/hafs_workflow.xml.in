@@ -11,7 +11,8 @@
 
   <!-- Maximum number of times to try various jobs -->
   <!ENTITY MAX_TRIES_TRANSFER "6"> <!-- pulling data over network -->
-  <!ENTITY MAX_TRIES_BIG_JOBS "1"> <!-- forecast or other huge jobs -->
+  <!ENTITY MAX_TRIES_FORECAST "2"> <!-- forecast jobs -->
+  <!ENTITY MAX_TRIES_BIG_JOBS "1"> <!-- other huge jobs -->
   <!ENTITY MAX_TRIES "1"> <!-- everything else -->
 
  <!-- Extra variables to send to the exhwrf_launch.py -->
@@ -829,7 +830,7 @@
 
 @** endif
 
-  <task name="forecast" maxtries="&MAX_TRIES;">
+  <task name="forecast" maxtries="&MAX_TRIES_FORECAST;">
     <command>&JOBhafs;/JHAFS_FORECAST</command>
     <jobname>hafs_forecast_&SID;_<cyclestr>@Y@m@d@H</cyclestr></jobname>
     <join><cyclestr>&WORKhafs;/hafs_forecast.log</cyclestr></join>

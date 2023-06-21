@@ -1383,9 +1383,11 @@ ${NCP} ${HOMEhafs}/sorc/hafs_forecast.fd/tests/parm/fd_nems.yaml ./
 # Copy the executable and run the forecast
 FORECASTEXEC=${FORECASTEXEC:-${EXEChafs}/hafs_forecast.x}
 ${NCP} -p ${FORECASTEXEC} ./hafs_forecast.x
+#xport KMP_STACKSIZE=128M
+export OMP_STACKSIZE=128M
 #${APRUNC} ./hafs_forecast.x 1>forecast.out 2>forecast.err
 set -o pipefail
-${APRUNC} ./hafs_forecast.x 2>&1 | tee forecast.log
+${APRUN_FORECAST:-$APRUNC} ./hafs_forecast.x 2>&1 | tee forecast.log
 set +o pipefail
 
 if [ $gtype = regional ] && [ ${run_datm} = no ]; then

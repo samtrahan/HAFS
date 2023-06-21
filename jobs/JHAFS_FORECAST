@@ -63,6 +63,7 @@ mkdir -p $DATA
 cd $DATA
 
 # Execute ex-script
+export FORECASTEXEC=${EXEChafs}/hafs_latest_forecast.x
 ${HOMEhafs}/scripts/exhafs_forecast.sh
 
 export KEEPDATA=${KEEPDATA:-YES}

@@ -505,7 +505,7 @@ _setup_compiler (){
 # Define all compiler flags for the analysis-update application.
 
     export ANALYSIS_UPDATE_DEBUG=""
-    export ANALYSIS_UPDATE_FCFLAGS="-O3 -heap-arrays -mkl=sequential -convert big_endian -assume byterecl -DLINUX"
+    export ANALYSIS_UPDATE_FCFLAGS="-O3 -heap-arrays -convert big_endian -assume byterecl -DLINUX"
 
 # Define all compiler flags for the obs-preproc application.
 

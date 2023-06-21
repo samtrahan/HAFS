@@ -1254,7 +1254,7 @@ static void initialize_environment(int * p_argc,char ***p_argv) {
   signal_workarounds(); /* when using LSF or OpenMPI, restore all signals */
 
   /* Enable MPI error handling so that we can give intelligent error messages */
-  mpicall(4,MPI_Errhandler_set(MPI_COMM_WORLD, MPI_ERRORS_RETURN),"initializing mpi error handler");
+  mpicall(4,MPI_Comm_set_errhandler(MPI_COMM_WORLD, MPI_ERRORS_RETURN),"initializing mpi error handler");
 
   /* Set world_size and world_rank to avoid duplicate calls */
   mpicall(2,MPI_Comm_rank(MPI_COMM_WORLD,&world_rank),"determining mpi rank in MPI_COMM_WORLD");

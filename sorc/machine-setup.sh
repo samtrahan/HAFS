@@ -39,11 +39,11 @@ elif [[ -d /scratch1/NCEPDEV ]] ; then
     module purge
     module use /apps/modules/modulefiles
     module use /apps/lmod/lmod/modulefiles/Core
-elif [[ -d /lustre/work ]] ; then
+elif [[ "$PLATFORM" == axiom ]] ; then
     # We are on Axiom's Azure cluster
     if ( ! eval module help > /dev/null 2>&1 ) ; then
         echo load the module command 1>&2
-        source /lustre/work/soft/lmod/lmod/init//$__ms_shell
+        source /lustre/opt/lmod/lmod/init//$__ms_shell
     fi
     target=axiom
     module purge

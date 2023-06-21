@@ -295,7 +295,7 @@ elif [ $gtype = regional ] && [ ${nest_grids} -gt 1 ]; then
   for itile in $(seq 8 $ntiles); do
     echo "${APRUNO} $MAKEOROGSSH $CRES ${itile} $grid_dir $orog_dir $script_dir $FIXorog $DATA ${BACKGROUND}" >>$DATA/orog.file1
   done
-  if [ "$machine" = hera ] || [ "$machine" = orion ] || [ "$machine" = jet ]; then
+  if [ "$machine" = hera ] || [ "$machine" = orion ] || [ "$machine" = jet ] || [ "$machine" = axiom ] ; then
     echo 'wait' >> orog.file1
   fi
   chmod u+x $DATA/orog.file1
@@ -320,7 +320,7 @@ elif [ $gtype = regional ] && [ ${nest_grids} -gt 1 ]; then
   for itile in $(seq 8 $ntiles); do
     echo "${APRUNO} $MAKEOROGGSLSSH $CRES ${itile} -999 $grid_dir $orog_dir $FIXorog $DATA ${BACKGROUND}" >>$DATA/orog_gsl.file1
   done
-  if [ "$machine" = hera ] || [ "$machine" = orion ] || [ "$machine" = jet ]; then
+  if [ "$machine" = hera ] || [ "$machine" = orion ] || [ "$machine" = jet ] || [ "$machine" = axiom ] ; then
     echo 'wait' >> $DATA/orog_gsl.file1
   fi
   chmod u+x $DATA/orog_gsl.file1
@@ -405,7 +405,7 @@ if [ $gtype = regional ]; then
   echo "............ execute $MAKEOROGSSH ................."
   #echo "$MAKEOROGSSH $CRES 7 $grid_dir $orog_dir $script_dir $FIXorog $DATA " >$DATA/orog.file1
   echo "${APRUNO} $MAKEOROGSSH $CRES 7 $grid_dir $orog_dir $script_dir $FIXorog $DATA ${BACKGROUND}" >$DATA/orog.file1
-  if [ "$machine" = hera ] || [ "$machine" = orion ] || [ "$machine" = jet ]; then
+  if [ "$machine" = hera ] || [ "$machine" = orion ] || [ "$machine" = jet ] || [ "$machine" = axiom ] ; then
     echo 'wait' >> orog.file1
   fi
   chmod u+x $DATA/orog.file1
@@ -468,7 +468,7 @@ if [ $gtype = regional ]; then
   date
   echo "............ execute $MAKEOROGGSLSSH ................."
   echo "${APRUNO} $MAKEOROGGSLSSH $CRES 7 -999 $grid_dir $orog_dir $FIXorog $DATA ${BACKGROUND}" >$DATA/orog_gsl.file1
-  if [ "$machine" = hera ] || [ "$machine" = orion ] || [ "$machine" = jet ]; then
+  if [ "$machine" = hera ] || [ "$machine" = orion ] || [ "$machine" = jet ] || [ "$machine" = axiom ] ; then
     echo 'wait' >> $DATA/orog_gsl.file1
   fi
   chmod u+x $DATA/orog_gsl.file1

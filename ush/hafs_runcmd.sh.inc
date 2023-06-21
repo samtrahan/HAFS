@@ -7,10 +7,10 @@ export TOTAL_TASKS=${TOTAL_TASKS:-1}
 export NCTSK=${NCTSK:-1}
 export OMP_NUM_THREADS=${OMP_THREADS:-${OMP_NUM_THREADS:-24}}
 export PURE_OMP_THREADS=${PURE_OMP_THREADS:-${OMP_NUM_THREADS:-24}}
+#export KMP_NUM_THREADS=$OMP_NUM_THREADS
 export NCNODE=${NCNODE:-$(($NCTSK * $OMP_NUM_THREADS))}
-export KMP_AFFINITY=disabled
-export KMP_STACKSIZE=${KMP_STACKSIZE:-2048m}
-#export OMP_STACKSIZE=${OMP_STACKSIZE:-2048m}
+#export KMP_STACKSIZE=${KMP_STACKSIZE:-2048m}
+export OMP_STACKSIZE=${OMP_STACKSIZE:-2048m}
 
 # Set job run commands
 # APRUNS: command to run serial jobs
@@ -26,6 +26,20 @@ if [ "$machine" = wcoss2 ]; then
   export APRUNF="mpiexec -n ${TOTAL_TASKS} cfp "
   export APRUNCFP="mpiexec"
   export APRUNO="time"
+elif [ "$PLATFORM" = axiom ] ; then
+  export APRUNS="time"
+  export APRUNO="time"
+  export APRUNC="mpiexec -n ${TOTAL_TASKS} -nooversubscribe --bind-to none --mca routed radix"
+#  export APRUN_FORECAST="mpiexec -x 'UCX_IB_ADDR_TYPE=ib_global' -mca pml ucx -np ${TOTAL_TASKS} -cpus-per-proc $OMP_NUM_THREADS"
+#  export APRUN_FORECAST="mpiexec -mca pml ucx -np ${TOTAL_TASKS} -cpus-per-proc $OMP_NUM_THREADS"
+  export APRUN_FORECAST="mpiexec -np ${TOTAL_TASKS} -cpus-per-proc $OMP_NUM_THREADS"
+#  export APRUNC="mpiexec -np ${TOTAL_TASKS} -cpus-per-proc ${OMP_NUM_THREADS}"
+  export APRUNF="time"
+  export BACKGROUND="&"
+  #export KMP_AFFINITY=scatter,verbose
+  export UCX_TLS=rc,ud,sm,self
+  module load ucx
+  #export HWLOC_COMPONENTS=linux
 elif [ "$machine" = jet ] || [ "$machine" = hera ] || [ "$machine" = orion ]; then
   export APRUNS="srun --mem=0 --ntasks=1 --nodes=1 --ntasks-per-node=1 --cpus-per-task=1"
   export APRUNO="srun --mem=0 --exclusive --ntasks=1 --nodes=1 --ntasks-per-node=${NCTSK} --cpus-per-task=${PURE_OMP_THREADS}"

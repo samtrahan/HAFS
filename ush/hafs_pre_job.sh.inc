@@ -29,6 +29,14 @@ if [[ -d /lfs4 ]] ; then
     module purge
     module use /apps/modules/modulefiles
     module use /apps/lmod/lmod/modulefiles/Core
+elif [[ "$PLATFORM" == axiom ]] ; then
+    # We are on an Axiom Azure cluster
+    if ( ! eval module help > /dev/null 2>&1 ) ; then
+        echo load the module command 1>&2
+        source /lustre/opt/lmod/lmod/init/$__ms_shell
+    fi
+    target=axiom
+    module purge
 elif [[ -d /scratch1/NCEPDEV ]] ; then
     # We are on NOAA Hera
     if ( ! eval module help > /dev/null 2>&1 ) ; then

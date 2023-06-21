@@ -8,16 +8,22 @@ if [ ! -d "../exec" ]; then
   mkdir ../exec
 fi
 
-module use ../modulefiles
-module load hafs.${target}
-module list
+#module use ../modulefiles
+#module load hafs.${target}
+#module use $PWD/hafs_forecast.fd/modulefiles/
+#module load ufs_$target.intel
+#module list
 
+if [ $target = axiom ]; then target=axiom.intel ; fi
 if [ $target = hera ]; then target=hera.intel ; fi
 if [ $target = orion ]; then target=orion.intel ; fi
 if [ $target = jet ]; then target=jet.intel ; fi
 
-#module use hafs_forecast.fd/modulefiles
-#module load ufs_${target}
+set +x
+module use $PWD/hafs_forecast.fd/modulefiles
+module load ufs_${target}
+module list
+set -x
 
 cd hafs_forecast.fd/WW3
 
@@ -31,11 +37,11 @@ export WW3_F90=gfortran
 export SWITCHFILE="${WW3_DIR}/esmf/switch"
 
 export WWATCH3_ENV=${WW3_BINDIR}/wwatch3.env
-export PNG_LIB=${PNG_LIB:-$PNG_ROOT/lib64/libpng.a}
-export Z_LIB=${Z_LIB:-$ZLIB_ROOT/lib/libz.a}
-export JASPER_LIB=${JASPER_LIB:-$JASPER_ROOT/lib64/libjasper.a}
+export PNG_LIB=${PNG_LIB:-${LIBPNG_LIB:-$PNG_ROOT/lib/libpng.a}}
+export Z_LIB=${Z_LIB:-$zlib_ROOT/lib/libz.a}
+export JASPER_LIB="-L${JASPER_LIB:-$jasper_ROOT/lib} -ljasper"
 export WWATCH3_NETCDF=NC4
-export NETCDF_CONFIG=${NETCDF_ROOT:-${NETCDF}}/bin/nc-config
+export NETCDF_CONFIG=${netcdf_c_ROOT:-${NETCDF}}/bin/nc-config
 
 rm -f $WWATCH3_ENV
 echo '#'                                              > $WWATCH3_ENV
