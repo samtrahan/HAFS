@@ -43,7 +43,7 @@ elif [[ "$PLATFORM" == axiom ]] ; then
     # We are on Axiom's Azure cluster
     if ( ! eval module help > /dev/null 2>&1 ) ; then
         echo load the module command 1>&2
-        source /lustre/opt/lmod/lmod/init//$__ms_shell
+        source /etc/profile.d/init-lmod.sh
     fi
     target=axiom
     module purge
