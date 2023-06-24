@@ -1,0 +1,66 @@
+## This is the system-specific configuration file for the Hera
+[config]
+
+hafs_data={ENV[HAFS_DATA]}
+hafs_scrub={ENV[HAFS_SCRUB]}
+hafs_noscrub={ENV[HAFS_NOSCRUB]}
+
+## Project disk area
+disk_project=hwrf
+## Project hpss tape area
+tape_project=None
+## CPU account name for submitting jobs to the batch system.
+cpu_account=None
+## Archive path
+#archive=hpss:/NCEPDEV/{tape_project}/5year/{ENV[USER]}/{SUBEXPT}/{out_prefix}.tar
+## Specify input sources for HISTORY mode.
+input_sources=azure_sources_{GFSVER}
+## Specify the DataCatalog for FORECAST mode runs.
+fcst_catalog=azure_fcst_{GFSVER}
+
+[hafsdata]
+inputroot={hafs_data}/HAFS_INPUT
+
+[azure_fcst_PROD2019]
+inputroot={hafs_data}/HAFS_INPUT
+
+[dir]
+## Non-scrubbed directory for track files, etc.  Make sure you edit this.
+CDNOSCRUB={hafs_noscrub}/hafstrak
+DOCNdir={hafs_noscrub}/DOCN
+DATMdir={hafs_noscrub}/DATM
+## Save directory.  Make sure you edit this.
+CDSAVE=/lustre/work/src
+## Scrubbed directory for large work files.  Make sure you edit this.
+CDSCRUB={hafs_scrub}
+## Syndat directory for finding which cycles to run
+syndat={hafs_data}/HAFS_INPUT/SYNDAT-PLUS
+## Input GFS data directory
+COMgfs={hafs_data}/HAFS_INPUT
+COMINgfs={COMgfs}
+COMINhafs={COMINgfs}
+#COMINhafs=/scratch1/NCEPDEV/hwrf/noscrub/hafs-input/COMGFSv16
+COMrtofs={hafs_data}/HAFS_INPUT
+COMINrtofs={COMrtofs}
+## A-Deck directory for graphics
+ADECKhafs={hafs_data}/HAFS_INPUT/abdeck/aid
+## B-Deck directory for graphics
+BDECKhafs={hafs_data}/HAFS_INPUT/abdeck/btk
+## cartopyDataDir directory for graphics
+cartopyDataDir={hafs_data}/cartopy
+
+[holdvars]
+WHERE_AM_I=axiom   ;; Which cluster?  (For setting up environment.)
+WHICH_JET=none     ;; Which part of Jet are we on?  None; we are not on Jet.
+
+[forecast]
+glob_layoutx=8
+glob_layouty=10
+layoutx=30
+layouty=30
+write_groups=3
+write_tasks_per_group=60
+
+#[rocotostr]
+#FORECAST_RESOURCES=FORECAST_RESOURCES_2040PE
+#FORECAST_RESOURCES=FORECAST_RESOURCES_regional_{forecast/layoutx}x{forecast/layouty}io{forecast/write_groups}x{forecast/write_tasks_per_group}_omp2

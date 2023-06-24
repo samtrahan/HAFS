@@ -2,8 +2,15 @@
 set -x
 date
 
+
 HOMEhafs=/lustre/work/src/HAFS
 source ${HOMEhafs}/ush/hafs_pre_job.sh.inc
+
+if ( ! -s ../parm/system.conf ) ; then
+    oper-axiom120amd-07L-2022091412.sh ../parm/system.conf
+elif ( ! cmp ../parm/system.conf ../oper-axiom120amd-07L-2022091412.sh ) ; then
+    echo WARNING: ../parm/system.conf does not match ../parm/oper-axiom120amd-07L-2022091412.sh
+fi
 
 cd ${HOMEhafs}/rocoto
 EXPT=$(basename ${HOMEhafs})
@@ -27,7 +34,8 @@ scrubopt="config.scrub_work=no config.scrub_com=no"
      config.GRID_RATIO_ENS=2 \
      gsi.use_bufr_nr=yes \
      gsi.grid_ratio_fv3_regional=1 \
-     ../parm/hafsv1b_phase3_72s.conf
+     ../parm/hafsv1b_phase3_72s.conf \
+     rocoto.FORECAST_RESOURCES=FORECAST_RESOURCES_2040PE
 
 date
 echo 'cronjob done'
